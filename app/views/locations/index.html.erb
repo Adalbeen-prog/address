@@ -1,34 +1,36 @@
-<div class="container">
-  <div class="text-center">
-  <h1 class="display-3">Adresář</h1>
-  </div>
+<div class="row m-0 justify-content-center">
+  <div class="col-xl-10 col-lg-12">
+    <div class="text-center">
+    <h1 class="display-3">Adresář</h1>
+    </div>
 
-  <table class="table">
-  <thead class="thead-light">
-      <tr>
-        <th>Město</th>
-        <th>Ulice</th>
-        <th>PSČ</th>
-        <th>Uživatel</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @locations.each do |location| %>
-        <% person = @people.find(location.person_id) %>
+    <table class="table">
+    <thead class="thead-light">
         <tr>
-          <td class="align-middle"><%= location.city %></td>
-          <td class="align-middle"><%= location.street %></td>
-          <td class="align-middle"><%= location.psc %></td>
-          <td class="align-middle"><a href="/people/<%= location.person_id %>"><i class="fas fa-male"></i> <%= person.name %> <%= person.surname %></i></a></td>
-          <td class="align-middle"><%= link_to 'Ukázat', location, :class => "btn btn-outline-primary" %></td>
-          <td class="align-middle"><%= link_to 'Editovat', edit_location_path(location), :class => "btn btn-outline-secondary" %></td>
-          <td class="align-middle"><%= link_to 'Smazat', location, :class => "btn btn-outline-danger", method: :delete, data: { confirm: 'Jste si jistý/á?' } %></td>
+          <th>Město</th>
+          <th>Ulice</th>
+          <th>PSČ</th>
+          <th>Uživatel</th>
+          <th colspan="3"></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="d-flex justify-content-center"><%= paginate @locations %></div>
+      </thead>
+
+      <tbody>
+        <% @locations.each do |location| %>
+          <% person = @people.find(location.person_id) %>
+          <tr> 
+            <td class="align-middle"><%= location.city %></td>
+            <td class="align-middle"><%= location.street %></td>
+            <td class="align-middle"><%= location.psc %></td>
+            <td class="align-middle"><a href="/people/<%= location.person_id %>"><i class="fas fa-male"></i> <%= person.name %> <%= person.surname %></i></a></td>
+            <td class="align-middle"><%= link_to 'Ukázat', location, :class => "btn btn-outline-primary" %></td>
+            <td class="align-middle"><%= link_to 'Editovat', edit_location_path(location), :class => "btn btn-outline-secondary" %></td>
+            <td class="align-middle"><%= link_to 'Smazat', location, :class => "btn btn-outline-danger", method: :delete, data: { confirm: 'Jste si jistý/á?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-center"><%= paginate @locations %></div>
+  </div>
 </div>
 
