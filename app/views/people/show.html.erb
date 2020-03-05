@@ -23,11 +23,11 @@
    <% (@locations.where("person_id = ?",  @person.id)).each do |location| %>
     <a href="/locations/<%= location[:id] %>" class="list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1"><%= location[:city] %></h5>
+        <h5 class="mb-1"><i class="fas fa-city"></i> <strong>Město: </strong><%= location[:city] %></h5>
         <small>Vytvořeno: <%= location[:created_at] %></small>
       </div>
-      <p class="mb-1"><%= location[:street] %></p>
-      <small><%= location[:psc] %></small>
+      <p class="mb-1"><i class="fas fa-road"></i> <strong>Ulice: </strong><%= location[:street] %></p>
+      <small><i class="fas fa-mail-bulk"></i> <strong>PSČ: </strong><%= location[:psc] %></small>
     </a>
     <% end %>
   </div>

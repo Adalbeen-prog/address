@@ -29,15 +29,9 @@ class PeopleController < ApplicationController
   def create
     @person = Person.new(person_params)
     
-    birthMonth = person_params[:birthNumber][2,2].to_i > 50 ? person_params[:birthNumber][2,2].to_i-50 : person_params[:birthNumber][2,2].to_i
-    birthMonth = birthMonth.to_s.length == 2 ? birthMonth : "0"+birthMonth.to_s
-    if person_params[:birthNumber][0,2].to_i < 54 && person_params[:birthNumber].length != 10
-      birthYear = "20"+person_params[:birthNumber][0,2]
-    else
-      birthYear = "19"+person_params[:birthNumber][0,2]
-    end
-    @person.dateOfBirth = "#{person_params[:birthNumber][4,2]}/#{birthMonth}/#{birthYear}"
-    @person.sex = person_params[:birthNumber][2,2].to_i > 50 ? 'Žena' : 'Muž'
+    
+    @person.dateOfBirth = getDateFromBirthDate(person_params[:birthNumber])
+    @person.sex = getSexFromBirthDate(person_params[:birthNumber])
 
     respond_to do |format|
       if @person.save
@@ -54,7 +48,10 @@ class PeopleController < ApplicationController
   # PATCH/PUT /people/1.json
   def update
     respond_to do |format|
-      if @person.update(person_params)
+      new_person_params = person_params 
+      new_person_params['dateOfBirth'] = getDateFromBirthDate(person_params[:birthNumber])
+      new_person_params['sex'] = getSexFromBirthDate(person_params[:birthNumber])
+      if @person.update(new_person_params)
         format.html { redirect_to @person, notice: 'Osoba byla upravena.' }
         format.json { render :show, status: :ok, location: @person }
       else
@@ -83,5 +80,22 @@ class PeopleController < ApplicationController
     # Only allow a list of trusted parameters through.
     def person_params
       params.require(:person).permit(:name, :surname, :birthNumber, :phoneNumber, :sex, :dateOfBirth)
+    end
+
+    private
+
+    def getDateFromBirthDate(birthDate)
+      birthMonth = birthDate[2,2].to_i > 50 ? birthDate[2,2].to_i-50 : birthDate[2,2].to_i
+      birthMonth = birthMonth.to_s.length == 2 ? birthMonth : "0"+birthMonth.to_s
+      if birthDate[0,2].to_i < 54 && birthDate.length != 10
+        birthYear = "20"+birthDate[0,2]
+      else
+        birthYear = "19"+birthDate[0,2]
+      end
+      return "#{birthDate[4,2]}/#{birthMonth}/#{birthYear}"
+    end
+
+    def getSexFromBirthDate(birthDate)
+      return birthDate[2,2].to_i > 50 ? 'Žena' : 'Muž'
     end
 end

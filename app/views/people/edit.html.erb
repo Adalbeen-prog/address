@@ -30,6 +30,12 @@
                 <%= form.label :phoneNumber, "Telefon:" %>
                 <%= form.text_field :phoneNumber, class: "form-control" %>
             </div>
+            <div class="form-group">
+                <%= form.text_field :sex, class: "hidden" %>
+            </div>
+            <div class="form-group">
+                <%= form.text_field :dateOfBirth, class: "hidden" %>
+            </div>
             <div class="form-group text-center">
                 <%= form.submit 'Odeslat', :class => 'btn btn-outline-primary btn-md' %>
             </div>
