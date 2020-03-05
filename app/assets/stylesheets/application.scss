@@ -1,0 +1,25 @@
+a:hover {
+    background-color:transparent;
+}
+
+div.field_with_errors input.form-control {
+    display: "";
+    border: 1px solid red;
+    background-color: #ffdddd;
+}
+
+table tbody tr td .table-row{
+    vertical-align: bottom;
+}
+
+.hidden {
+    display: none;
+}
+
+#notice {
+    margin-bottom: 0;
+}
+
+.pagination {
+    text-align: center;
+}

@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="card mt-5">
+    <div class="card-header">
+      <%= @person.name %> <%= @person.surname %>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><strong>Rodné číslo: </strong><%= @person.birthNumber %></li>
+      <li class="list-group-item"><strong>Telefonní číslo: </strong><%= @person.phoneNumber %></li>
+      <li class="list-group-item"><strong>Pohlaví: </strong><%= @person.sex %></li>
+      <li class="list-group-item"><strong>Datum narození: </strong><%= @person.dateOfBirth %></li>
+      <li class="list-group-item"><%= link_to 'Edit', edit_person_path(@person) %> |
+      <%= link_to 'Back', people_path %></li>
+    </ul> 
+  </div>
+
+  <h1 class="display-4 text-center mt-5">Seznam adres</h1>
+  <%= link_to "Přidat adresu", 
+            {:controller => "locations", 
+            :action => "new", 
+            :person_id => @person.id},
+            :class => "btn btn-outline-primary" %>
+  <div class="list-group mt-1">
+   <% (@locations.where("person_id = ?",  @person.id)).each do |location| %>
+    <a href="/locations/<%= location[:id] %>" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1"><%= location[:city] %></h5>
+        <small>Vytvořeno: <%= location[:created_at] %></small>
+      </div>
+      <p class="mb-1"><%= location[:street] %></p>
+      <small><%= location[:psc] %></small>
+    </a>
+    <% end %>
+  </div>
+</div>
+

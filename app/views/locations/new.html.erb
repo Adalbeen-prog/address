@@ -1,0 +1,37 @@
+<% if @location.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+ 
+    <ul>
+    <% @location.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h1 class="display-2 text-center">Přidat adresu kontaktu</h1>   
+
+<div class="container">
+    <%= form_for @location do |form| %>
+        <div class="form-group">
+            <%= form.label :street, "Ulice:" %>
+            <%= form.text_field :street, class: "form-control" %>
+        </div>
+        <div class="form-group">
+            <%= form.label :city, "Město:" %>
+            <%= form.text_field :city, class: "form-control" %>
+        </div>
+        <div class="form-group">
+            <%= form.label :psc, "PSČ:" %>
+            <%= form.text_field :psc, class: "form-control" %>
+        </div>
+        <div class="form-group">
+            <input class="hidden" type="text" name="location[person_id]" value="<%= params[:person_id] %>" id="location_person_id">
+        </div>
+        <div class="form-group text-center">
+            <%= form.submit 'Odeslat', :class => 'btn btn-outline-primary btn-md' %>
+            <a href="/people/<%= params[:person_id] %>" class="btn btn-outline-secondary btn-md">Zpátky...</a>
+        </div>
+    <% end %>
+</div>

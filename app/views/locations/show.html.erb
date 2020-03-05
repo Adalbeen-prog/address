@@ -1,0 +1,45 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Adresář</a></li>
+    <li class="breadcrumb-item"><a href="/people/<%= @location.person_id %>">Osoba</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Adresa</li>
+  </ol>
+</nav>
+
+<div class="container">
+  <ul class="list-group pl-5 pr-5">
+    <li class="list-group-item">
+      <p>
+        <i class="fas fa-road"></i>
+        <strong>Street:</strong>
+        <%= @location.street %>
+      </p>
+    </li>
+    <li class="list-group-item">
+      <p>
+        <i class="fas fa-city"></i>
+        <strong>City:</strong>
+        <%= @location.city %>
+      </p>
+    </li>
+    <li class="list-group-item">
+      <p>
+        <i class="fas fa-mail-bulk"></i>
+        <strong>Psc:</strong>
+        <%= @location.psc %>
+      </p>
+    </li>
+  </ul>
+  <div class="navigationButtons text-center">
+      <%= link_to 'Edit', edit_location_path(@location) %> |
+      <%= link_to 'Back', "/people/#{@location.person_id}" %>
+  <div>
+</div>
+
+
+
+
+
+
+
+

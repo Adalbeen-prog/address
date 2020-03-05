@@ -1,0 +1,41 @@
+<% if @person.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
+ 
+    <ul>
+    <% @person.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<h1 class="display-2 text-center">Přidat kontakt do adresáře</h1>    
+
+<div class="container">
+    <%= form_for @person do |form| %>
+        <div class="form-group">
+            <%= form.label :name, "Jméno:" %>
+            <%= form.text_field :name, class: "form-control" %>
+        </div>
+        <div class="form-group">
+            <%= form.label :surname, "Příjmení:" %>
+            <%= form.text_field :surname, class: "form-control" %>
+        </div>
+        <div class="form-group">
+            <%= form.label :birthNumber, "Rodné číslo:" %>
+            <%= form.text_field :birthNumber, class: "form-control" %>
+        </div>
+        <div class="form-group">
+            <%= form.label :phoneNumber, "Telefon:" %>
+            <%= form.text_field :phoneNumber, class: "form-control" %>
+        </div>
+        <div class="form-group text-center">
+            <%= form.submit 'Odeslat', :class => 'btn btn-outline-primary btn-md' %>
+            <a href="/people" class="btn btn-outline-secondary btn-md">Zpátky...</a>
+        </div>
+    <% end %>
+</div>
+    
+    
+

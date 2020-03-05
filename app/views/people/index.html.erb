@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="text-center">
+  <h1 class="display-3">Adresář</h1>
+  </div>
+
+  <table class="table">
+  <thead class="thead-light">
+      <tr>
+        <th>Jméno</th>
+        <th>Příjmení</th>
+        <th>Rodné číslo</th>
+        <th>Telefonní číslo</th>
+        <th>Pohlaví</th>
+        <th>Datum narození</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @people.each do |person| %>
+        <tr>
+          <td class="align-middle"><%= person.name %></td>
+          <td class="align-middle"><%= person.surname %></td>
+          <td class="align-middle"><%= person.birthNumber %></td>
+          <td class="align-middle"><%= person.phoneNumber %></td>
+          <td class="align-middle"><%= person.sex %></td>
+          <td class="align-middle"><%= person.dateOfBirth %></td>
+          <td class="align-middle"><%= link_to 'Ukázat', person, :class => "btn btn-outline-primary" %></td>
+          <td class="align-middle"><%= link_to 'Editovat', edit_person_path(person), :class => "btn btn-outline-secondary" %></td>
+          <td class="align-middle"><%= link_to 'Smazat', person, :class => "btn btn-outline-danger", method: :delete, data: { confirm: 'Jste si jistý/á?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center"><%= paginate @people %></div>
+</div>
+
